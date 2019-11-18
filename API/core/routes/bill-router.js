@@ -5,13 +5,13 @@
  */
 const express = require('express');
 const router = express.Router();
-const getProduct = require ('../controllers/get-product-controller')
+const getBill = require ('../controllers/get-bill-controller')
 
 
 /**
  * Rutas
  */
 
-router.get('/product', getProduct )
+router.get('/bill', getBill )
 
 module.exports = router;
