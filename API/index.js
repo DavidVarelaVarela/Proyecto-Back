@@ -8,6 +8,7 @@ const tableRouter = require("./core/routes/table-router");
 const orderRouter =require("./core/routes/order-router");
 const productRouter = require("./core/routes/product-router");
 const billRouter = require ("./core/routes/bill-router");
+const employeesRouter =require ("./core/routes/employees-router");
 
 /**
  * Special middleware for config cors
@@ -28,6 +29,7 @@ app.use("/api", tableRouter);
 app.use("/api", orderRouter);
 app.use("/api", productRouter);
 app.use("/api", billRouter);
+app.use ("/api", employeesRouter);
 
 function init() {
   const port = process.env.PORT;
