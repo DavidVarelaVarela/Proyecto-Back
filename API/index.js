@@ -1,9 +1,10 @@
 "use strict";
 
 require("dotenv").config();
+const bodyParser =require('body-parser');
 const express = require("express");
 const app = express();
-const userRouter = require("./core/routes/user-router");
+const customerRouter = require("./core/routes/customer-router");
 const tableRouter = require("./core/routes/table-router");
 const orderRouter =require("./core/routes/order-router");
 const productRouter = require("./core/routes/product-router");
@@ -23,8 +24,15 @@ app.use((req, res, next) => {
   res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
+app.use(bodyParser.json());
+app.use((err, req, res, next)=>{
+  console.error(err);
+  res.status(400).send({
+    error: `Body Parser: ${err.message}`,
+  })
+});
 
-app.use("/api", userRouter);
+app.use("/api", customerRouter);
 app.use("/api", tableRouter);
 app.use("/api", orderRouter);
 app.use("/api", productRouter);

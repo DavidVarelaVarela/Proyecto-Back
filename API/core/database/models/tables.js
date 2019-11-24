@@ -2,24 +2,21 @@ const Sequelize = require("sequelize");
 
 const { mysqlPool } = require("../mysql-pool");
 
-const user = mysqlPool.define(
-  "CUSTOMERS",
+const tables = mysqlPool.define(
+  "TABLES",
   {
-    idCUSTOMERS: {
+    idTables: {
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    name: {
-      type: Sequelize.TEXT
+    idCustomers: {
+      type: Sequelize.INTEGER
     },
-    mail: {
-      type: Sequelize.TEXT
+    idEmployees: {
+      type: Sequelize.INTEGER
     },
 
-    password: {
-      type: Sequelize.TEXT
-    },
-    phone: {
+    idOrders: {
       type: Sequelize.INTEGER
     }
   },
@@ -29,6 +26,5 @@ const user = mysqlPool.define(
   }
 );
 
-module.exports = user;
-
+module.exports = tables;
 
