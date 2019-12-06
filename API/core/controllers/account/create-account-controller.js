@@ -2,6 +2,7 @@
 
 const customers = require ('../../database/models/customers'); 
 const bcrypt = require ('bcrypt'); 
+
 //Recibir datos y dar de alta usuario
 /**
  *
@@ -10,7 +11,8 @@ const bcrypt = require ('bcrypt');
  * @param {*} next
  */
 
-async function registerCustomer(req, res, next) {
+async function createAccountController(req, res, next) {
+    //Comprobar req.body = null; Y si el cliente es repetido.
   const { name, password, mail, phone } = { ...req.body };
   const securePassword = await bcrypt.hash(password, 10);
   const newCostumer = await customers.create({
@@ -23,4 +25,4 @@ async function registerCustomer(req, res, next) {
   
 }
 
-module.exports = registerCustomer;
+module.exports = createAccountController;

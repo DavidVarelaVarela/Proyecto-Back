@@ -5,8 +5,8 @@
  */
 const express = require('express');
 const router = express.Router();
-const getEmployees = require('../controllers/get-employees-controller');
-const getEmployee = require('../controllers/get-employee-controller');
+const getEmployees = require('../controllers/employees/get-employees-controller');
+const getEmployee = require('../controllers/employees/get-employee-controller');
 /**
  * Rutas
  */

@@ -4,8 +4,8 @@
  */
 const express = require('express');
 const router = express.Router();
-const getOrder = require ('../controllers/get-order-controller' );
-const getFeedback = require ('../controllers/get-feedback-controller');
+const getOrder = require ('../controllers/order/get-order-controller' );
+const getFeedback = require ('../controllers/order/get-feedback-controller');
 /**
  * Rutas
  */

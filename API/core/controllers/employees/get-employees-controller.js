@@ -1,6 +1,6 @@
 
 'use strict'
-const employees = require ('../database/models/employees');
+const employees = require("../../database/models/employees");
 
 
 

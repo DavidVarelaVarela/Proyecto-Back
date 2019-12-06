@@ -15,7 +15,6 @@ const user = mysqlPool.define(
     mail: {
       type: Sequelize.TEXT
     },
-
     password: {
       type: Sequelize.TEXT
     },

@@ -1,10 +1,10 @@
 "use strict";
 
-const employees = require("../database/models/employees");
+const employee = require("../../database/models/employees");
 
 async function getEmployee(req, res, next) {
    if (parseInt(req.params.id)){
-    const dataEmployee = await employees.findAll({
+    const dataEmployee = await employee.findAll({
         where:{
             idEMPLOYEES:req.params.id
         }

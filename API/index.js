@@ -4,12 +4,8 @@ require("dotenv").config();
 const bodyParser =require('body-parser');
 const express = require("express");
 const app = express();
-const customerRouter = require("./core/routes/customer-router");
-const tableRouter = require("./core/routes/table-router");
-const orderRouter =require("./core/routes/order-router");
-const productRouter = require("./core/routes/product-router");
-const billRouter = require ("./core/routes/bill-router");
-const employeesRouter =require ("./core/routes/employees-router");
+
+const routers = require('./core/routes');
 
 /**
  * Special middleware for config cors
@@ -32,12 +28,13 @@ app.use((err, req, res, next)=>{
   })
 });
 
-app.use("/api", customerRouter);
-app.use("/api", tableRouter);
-app.use("/api", orderRouter);
-app.use("/api", productRouter);
-app.use("/api", billRouter);
-app.use ("/api", employeesRouter);
+app.use("/api", routers.customerRouter);
+app.use("/api", routers.tableRouter);
+app.use("/api", routers.orderRouter);
+app.use("/api", routers.productRouter);
+app.use("/api", routers.billRouter);
+app.use("/api", routers.employeesRouter);
+app.use("/api", routers.accountRouter);
 
 function init() {
   const port = process.env.PORT;
