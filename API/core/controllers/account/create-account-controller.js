@@ -20,7 +20,7 @@ async function createAccountController(req, res, next) {
     const newCostumer = await customers.create({
       name: accountData.name,
       password: securePassword,
-      email: accountData.email,
+      mail: accountData.email,
       phone: accountData.phone
     })
     const payloadJwt = {
