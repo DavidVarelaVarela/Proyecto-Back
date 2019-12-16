@@ -52,8 +52,8 @@ DROP TABLE IF EXISTS `CUSTOMERS`;
 CREATE TABLE `CUSTOMERS` (
   `idCUSTOMERS` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `mail` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `mail` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `phone` int(11) DEFAULT NULL,
   PRIMARY KEY (`idCUSTOMERS`),
   UNIQUE KEY `idCUSTOMERS_UNIQUE` (`idCUSTOMERS`)
@@ -78,7 +78,7 @@ DROP TABLE IF EXISTS `EMPLOYEES`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `EMPLOYEES` (
   `idEMPLOYEES` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(45) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idEMPLOYEES`),
   UNIQUE KEY `idEMPLOYEES_UNIQUE` (`idEMPLOYEES`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -132,7 +132,7 @@ DROP TABLE IF EXISTS `PRODUCTS`;
 CREATE TABLE `PRODUCTS` (
   `idProduct` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `price` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idProduct`),
   UNIQUE KEY `idPRODUCTS_UNIQUE` (`idProduct`)
