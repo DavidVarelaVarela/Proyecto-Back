@@ -1,0 +1,1 @@
+SELECT * FROM ses_database.EMPLOYEES;
