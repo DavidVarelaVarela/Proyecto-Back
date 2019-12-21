@@ -12,7 +12,7 @@ const jwt = require('jsonwebtoken')
  */
 
 async function createAccountController(req, res, next) {
- // Y si el cliente es repetido.
+ 
   const accountData = { ...req.body };
   const condition = ((accountData != null) && (accountData.name != null)) // Y demas condiciones
   
@@ -20,13 +20,13 @@ async function createAccountController(req, res, next) {
     //Obtener usuario segun el EMAIL accountData.email
     const existUser = await customers.findAll({
       where : {
-        email : accountData.email,
+        mail : accountData.mail,
       }
-    }).then( response => {
+    }).then( async (response) => {
       //La respuesta la compruebas si tiene datos
-      if (response != null){
+      if (response.length > 0){
         //Si respuesta con datos devolver un error
-        return res.status(418).send(error.message);
+        return res.status(418).send();
       } else {
         const securePassword = await bcrypt.hash(accountData.password, 10);
         //Si no tiene datos das de alta
