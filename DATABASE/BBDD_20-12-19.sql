@@ -23,9 +23,15 @@ DROP TABLE IF EXISTS `BILL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `BILL` (
-  `quantity` int(11) DEFAULT BILLNOT NULL,
+<<<<<<< HEAD
+  `quantity` int(11) DEFAULT BILL NOT NULL,
   `idOrder` int(11) DEFAULT  NOT NULL,
   `idProduct` int(11) DEFAULT  NOT NULL,
+=======
+  `quantity` int(11) DEFAULT NOT NULL,
+  `idOrder` int(11) DEFAULT NOT NULL,
+  `idProduct` int(11) DEFAULT NOT NULL,
+>>>>>>> 5b81db759c20cd8877dac5f207a722043e8b27af
   KEY `fk_ORDER_idx` (`idOrder`),
   KEY `fk_PRODUCT_idx` (`idProduct`),
   CONSTRAINT `fk_ORDERS` FOREIGN KEY (`idOrder`) REFERENCES `ORDERS` (`idOrders`) ON DELETE NO ACTION ON UPDATE NO ACTION,

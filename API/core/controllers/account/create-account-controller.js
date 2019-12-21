@@ -12,19 +12,32 @@ const jwt = require('jsonwebtoken')
  */
 
 async function createAccountController(req, res, next) {
+<<<<<<< HEAD
  
+=======
+  // Y si el cliente es repetido.
+>>>>>>> 5b81db759c20cd8877dac5f207a722043e8b27af
   const accountData = { ...req.body };
   const condition = ((accountData != null) && (accountData.name != null)) // Y demas condiciones
-  
+
   if (condition) {
     //Obtener usuario segun el EMAIL accountData.email
     const existUser = await customers.findAll({
+<<<<<<< HEAD
       where : {
         mail : accountData.mail,
       }
     }).then( async (response) => {
       //La respuesta la compruebas si tiene datos
       if (response.length > 0){
+=======
+      where: {
+        mail: accountData.email,
+      }
+    }).then(async (response) => {
+      //La respuesta la compruebas si tiene datos
+      if (response.length > 0) {
+>>>>>>> 5b81db759c20cd8877dac5f207a722043e8b27af
         //Si respuesta con datos devolver un error
         return res.status(418).send();
       } else {
@@ -44,12 +57,12 @@ async function createAccountController(req, res, next) {
             email: accountData.email,
             role: 'admin',
           };
-      
+
           const jwtExpiresIn = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL);
           const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, {
             expiresIn: jwtExpiresIn,
           });
-      
+
           const response = {
             accessToken: token,
             expiresIn: jwtExpiresIn,
@@ -63,7 +76,7 @@ async function createAccountController(req, res, next) {
       }
     })
   } else {
-    return res.status(418).send(error.message);
+    return res.status(418).send();
   }
 
 }
