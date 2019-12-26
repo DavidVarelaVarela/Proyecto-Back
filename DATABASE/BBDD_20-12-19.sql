@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `BILL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `BILL` (
-  `quantity` int(11) DEFAULT NOT NULL,
-  `idOrder` int(11) DEFAULT NOT NULL,
-  `idProduct` int(11) DEFAULT NOT NULL,
+  `quantity` int(11) DEFAULT  NULL,
+  `idOrder` int(11) DEFAULT  NULL,
+  `idProduct` int(11) DEFAULT  NULL,
   KEY `fk_ORDER_idx` (`idOrder`),
   KEY `fk_PRODUCT_idx` (`idProduct`),
   CONSTRAINT `fk_ORDERS` FOREIGN KEY (`idOrder`) REFERENCES `ORDERS` (`idOrders`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -136,6 +136,7 @@ CREATE TABLE `PRODUCTS` (
   `name` varchar(45) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `price` varchar(45) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idProduct`),
   UNIQUE KEY `idPRODUCTS_UNIQUE` (`idProduct`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -147,7 +148,7 @@ CREATE TABLE `PRODUCTS` (
 
 LOCK TABLES `PRODUCTS` WRITE;
 /*!40000 ALTER TABLE `PRODUCTS` DISABLE KEYS */;
-INSERT INTO `PRODUCTS` VALUES (1,'Carne estofada','Estofado de carne con verduras al vapor servido en cazuela.','14'),(2,'Ternera al horno','Deliciosa ternera troceada con acompañamiento de verduras salteadas.','16'),(3,'Chuletas a la parrilla','Magníficas chuletas a la parrlla a fuego lento con un toque sublime de especias salvajes.','10'),(4,'Cordero','Guiso de cordero en salsa de cebolla y apio.','12'),(5,'Albondigas de buey','Deliciosas albóndigas de buey acompañadas de puré de patata y un toque de perejil.','18'),(6,'Ensalada mediterránea','Espectacular ensalada de tomate,aguacate,pipas y pollo picante.','15'),(7,'Ensalada sueca','Ensalada con salmón y delicioso aguacate fresco.','12'),(8,'Ensalada otoño','Increible ensalada con productos de la estación triste.','12'),(9,'Ensalada verano','Ensalada fresca y luminosa llena de frutas frescas y jugosas.','12'),(10,'Spagueti  tintorato','Sabrosos spaguetti negro con gambas peladas frescas.','15'),(11,'Spagueti vegetale','ESpaguetis cocidos en agua vegetal .','15'),(12,'Minestrone de pasta','Jugoso plato de pasta minestrone con un toque de la casa','16'),(13,'Macarrones al fungi','Salteado de pasta con boletus de temporada','18'),(14,'Spaguetti a la vienesa','Spaguetti salteado con verduras y un toque de albahaca','16'),(15,'Spaguetti con carne','Spaguetti con carne picada especiada al gusto.','20'),(16,'Dorada','Dorada al horno con patatas cocidas y especias.','20'),(17,'Merluza','Merluza asada en confitura de albahaca y cebolla.','24'),(18,'Rape','Caldeirada de rape en salsa de setas','25'),(19,'Rodaballo','Lomos de rodaballo al horno acompañado de cerdo iberico y patatas','25'),(20,'Tarta de queso','Estupenda tarta de queso con galleta recubierto de canela fina','4'),(21,'Tarta de vainilla','Tarta de vainilla con galleta triturada.','4'),(22,'Tarta de limón y Iogurt','Deliciosa combinación de confitura de limón y Iogurt natural','4'),(23,'Kefir','Tapón de kefir caramelizado','4');
+INSERT INTO `PRODUCTS` VALUES (1,'Carne estofada','Estofado de carne con verduras al vapor servido en cazuela.','14','carne'),(2,'Ternera al horno','Deliciosa ternera troceada con acompañamiento de verduras salteadas.','16','carne'),(3,'Chuletas a la parrilla','Magníficas chuletas a la parrlla a fuego lento con un toque sublime de especias salvajes.','10','carne'),(4,'Cordero','Guiso de cordero en salsa de cebolla y apio.','12','carne'),(5,'Albondigas de buey','Deliciosas albóndigas de buey acompañadas de puré de patata y un toque de perejil.','18','carne'),(6,'Ensalada mediterránea','Espectacular ensalada de tomate,aguacate,pipas y pollo picante.','15','ensalada'),(7,'Ensalada sueca','Ensalada con salmón y delicioso aguacate fresco.','12','ensalada'),(8,'Ensalada otoño','Increible ensalada con productos de la estación triste.','12','ensalada'),(9,'Ensalada verano','Ensalada fresca y luminosa llena de frutas frescas y jugosas.','12','ensalada'),(10,'Spagueti  tintorato','Sabrosos spaguetti negro con gambas peladas frescas.','15','pasta'),(11,'Spagueti vegetale','ESpaguetis cocidos en agua vegetal .','15','pasta'),(12,'Minestrone de pasta','Jugoso plato de pasta minestrone con un toque de la casa','16','pasta'),(13,'Macarrones al fungi','Salteado de pasta con boletus de temporada','18','pasta'),(14,'Spaguetti a la vienesa','Spaguetti salteado con verduras y un toque de albahaca','16','pasta'),(15,'Spaguetti con carne','Spaguetti con carne picada especiada al gusto.','20','pasta'),(16,'Dorada','Dorada al horno con patatas cocidas y especias.','20','pescado'),(17,'Merluza','Merluza asada en confitura de albahaca y cebolla.','24','pescado'),(18,'Rape','Caldeirada de rape en salsa de setas','25','pescado'),(19,'Rodaballo','Lomos de rodaballo al horno acompañado de cerdo iberico y patatas','25','pescado'),(20,'Tarta de queso','Estupenda tarta de queso con galleta recubierto de canela fina','4','postre'),(21,'Tarta de vainilla','Tarta de vainilla con galleta triturada.','4','postre'),(22,'Tarta de limón y Iogurt','Deliciosa combinación de confitura de limón y Iogurt natural','4','postre'),(23,'Kefir','Tapón de kefir caramelizado','4','postre');
 /*!40000 ALTER TABLE `PRODUCTS` ENABLE KEYS */;
 UNLOCK TABLES;
 

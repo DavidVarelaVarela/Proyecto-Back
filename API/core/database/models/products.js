@@ -18,6 +18,9 @@ const products = mysqlPool.define(
 
     price: {
       type: Sequelize.TEXT
+    },
+    type: {
+      type: Sequelize.TEXT
     }
   },
   {
