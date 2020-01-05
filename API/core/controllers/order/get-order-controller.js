@@ -6,8 +6,6 @@ const orders = require("../../database/models/orders");
 
 async function getOrder(req, res, next) {
   const { order } = { ...req.body }
-  console.log(order)
-  const { idProduct, quantity } = order[0];
 
 
   const id = uuidv4()
@@ -26,11 +24,12 @@ async function getOrder(req, res, next) {
       await bill.create({
         quantity: pedido.quantity,
         idOrder: id,
-        idProduct: pedido.idProduct
+        idProduct: pedido.idProduct,
+        price: pedido.price
       })
     })
 
-    return res.status(201).send(id);
+    return res.status(201).send({ id });
   } catch (e) {
     return res.status(500).send(e.message)
   }
