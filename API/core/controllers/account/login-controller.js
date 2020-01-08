@@ -51,8 +51,9 @@ async function loginController(req, res, next) {
      * Four - Create token with JWT the payload use role attribute but it is not yet implemented
      */
     const payloadJwt = {
-      email: result.email,
+      email: result.dataValues.mail,
     };
+
 
     const jwtTokenExpiration = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL, 10);
     const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, { expiresIn: jwtTokenExpiration });

@@ -22,11 +22,11 @@ function checkJwtToken(req, res, next) {
   const [prefix, accesToken] = authorization.split(' ');
 
   if (prefix !== 'Bearer') {
-    return res.status(401).send('aqui');
+    return res.status(401).send();
   }
 
   if (!accesToken) {
-    return res.status(401).send('noo!');
+    return res.status(401).send();
   }
 
   try {
@@ -34,17 +34,19 @@ function checkJwtToken(req, res, next) {
     /**
      * Decoded token and obtein values  
      */
-    const decoded = jwt.verify(accesToken, authJwtSecret);
+
+    const email = jwt.verify(accesToken, process.env.AUTH_JWT_SECRET);
     req.claims = {
-      email: decoded.email
+      email
     };
+
 
 
 
     return next();
 
   } catch (e) {
-    return res.status(401).send('aa');
+    return res.status(401).send();
   }
 }
 

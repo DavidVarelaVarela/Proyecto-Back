@@ -5,34 +5,28 @@ const bill = require("../../database/models/bill")
 const orders = require("../../database/models/orders");
 
 async function putOrder(req, res, next) {
-    const { order } = { ...req.body }
+    const { totalPrice } = { ...req.body }
     const { id } = req.params;
 
-
+    console.log(totalPrice)
 
 
     try {
-
-        const actualBill = await bill.findAll({ where: { idOrder: id } })
-
-        const updatedBill = order.map((pedido, i) => {
-            for (let j = 0; j < actualBill.length; j++) {
-
-                if (pedido.idProduct === actualBill[j].idProduct) {
-                    pedido.quantity = actualBill[j].quantity + pedido.quantity
-                }
-            }
-            return pedido
-        })
+        const [actualOrder] = await orders.findAll({ where: { idOrders: id } })
+        console.log(actualOrder.dataValues.inicialTime)
+        const orderToPay = await orders.update({
+            idOrders: id,
+            status: 'Pagado',
+            deliveryTime: new Date(),
+            durationTime: null,
+            rating: null,
+            totalPrice: totalPrice
+        }, { where: { idOrders: id } })
 
 
-        const finalBill = await updatedBill.map(async (newBill) => {
-            await bill.findOrCreate({ where: { idOrder: id, idProduct: newBill.idProduct }, defaults: { price: newBill.price, quantity: newBill.quantity } });
-            await bill.update({ price: newBill.price, quantity: newBill.quantity }, { where: { idOrder: id, idProduct: newBill.idProduct } })
-        })
 
 
-        return res.status(201).send(updatedBill);
+        return res.status(201).send('ok');
     } catch (e) {
         return res.status(500).send(e.message)
     }

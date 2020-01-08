@@ -12,7 +12,7 @@ const tables = mysqlPool.define(
     idCustomers: {
       type: Sequelize.INTEGER
     },
-    idEmployees: {
+    idEnployees: {
       type: Sequelize.INTEGER
     },
 
