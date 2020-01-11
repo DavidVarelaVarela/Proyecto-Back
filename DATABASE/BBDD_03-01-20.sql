@@ -161,9 +161,9 @@ DROP TABLE IF EXISTS `TABLES`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `TABLES` (
-  `idTables` int(11) NOT NULL,
+  `idTables` int(11) NOT NULL AUTO_INCREMENT,
   `idCustomers` int(11) DEFAULT NULL,
-  `idEnployees` int(11) DEFAULT NULL,
+  `idEmployees` int(11) DEFAULT NULL,
   `idOrders` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idTables`),
   KEY `fk_Customers_idx` (`idCustomers`),
