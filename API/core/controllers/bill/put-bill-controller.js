@@ -13,13 +13,13 @@ async function putBill(req, res, next) {
 
     try {
 
-        const actualBill = await bill.findAll({ where: { idOrder: id } })
+        const currentBill = await bill.findAll({ where: { idOrder: id } })
 
         const updatedBill = order.map((pedido, i) => {
-            for (let j = 0; j < actualBill.length; j++) {
+            for (let j = 0; j < currentBill.length; j++) {
 
-                if (pedido.idProduct === actualBill[j].idProduct) {
-                    pedido.quantity = actualBill[j].quantity + pedido.quantity
+                if (pedido.idProduct === currentBill[j].idProduct) {
+                    pedido.quantity = currentBill[j].quantity + pedido.quantity
                 }
             }
             return pedido
@@ -32,7 +32,7 @@ async function putBill(req, res, next) {
         })
 
 
-        return res.status(201).send(updatedBill);
+        return res.status(201).send();
     } catch (e) {
         return res.status(500).send(e.message)
     }

@@ -41,7 +41,7 @@ async function getOrder(req, res, next) {
 
     const newTable = await table.create({
       idCustomers: user.dataValues.idCUSTOMERS,
-      idEnployees: Math.floor(Math.random() * 3 + 1),
+      idEmployees: Math.floor(Math.random() * 3 + 1),
       idOrders: id,
     })
     const userTable = await table.findOne({
