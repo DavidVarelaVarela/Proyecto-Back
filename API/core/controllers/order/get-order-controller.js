@@ -38,21 +38,25 @@ async function getOrder(req, res, next) {
         price: pedido.price
       })
     })
-
+      
+    console.log(newBill);
     const newTable = await table.create({
       idCustomers: user.dataValues.idCUSTOMERS,
       idEmployees: Math.floor(Math.random() * 3 + 1),
       idOrders: id,
     })
+    console.log(newTable);
+
     const userTable = await table.findOne({
       where: {
         idOrders: id,
       }
     });
+    console.log("hasta aqui 2");
     const idTable = (userTable.dataValues.idTables)
     return res.status(201).send({ id, idTable });
   } catch (e) {
-
+    console.log(e);
     return res.status(500).send(e.message)
   }
 }
