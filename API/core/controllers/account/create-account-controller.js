@@ -42,7 +42,7 @@ async function createAccountController(req, res, next) {
           const payloadJwt = {
             name: accountData.name,
             email: accountData.email,
-            role: 'admin',
+            role: 'user',
           };
 
           const jwtExpiresIn = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL);

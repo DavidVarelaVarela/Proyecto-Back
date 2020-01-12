@@ -2,10 +2,12 @@
 
 const uuidv4 = require('uuid/v4');
 const bill = require("../../database/models/bill")
-const orders = require("../../database/models/orders");
 const customer = require("../../database/models/customers")
+const orders = require("../../database/models/orders");
 const table = require("../../database/models/tables")
 
+
+const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
 
 async function getOrder(req, res, next) {
   const { order } = { ...req.body }
@@ -50,6 +52,7 @@ async function getOrder(req, res, next) {
       }
     });
     const idTable = (userTable.dataValues.idTables)
+    res.setHeader('Location', `${httpServerDomain}/order/${id}`);
     return res.status(201).send({ id, idTable });
   } catch (e) {
 
