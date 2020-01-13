@@ -37,7 +37,7 @@ app.use("/api", routers.employeesRouter);
 app.use("/api", routers.accountRouter);
 
 function init() {
-  const port = process.env.PORT;
+  const port = process.env.PORT || 8000;
   app.listen(port, function() {
     console.log(`Está funcionando en el puerto ${port}`);
   });
