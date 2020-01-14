@@ -8,6 +8,7 @@ const table = require("../../database/models/tables")
 
 
 const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
+const randomEmployeer = Math.floor(Math.random() * 3 + 1);
 
 async function getOrder(req, res, next) {
   const { order } = { ...req.body }
@@ -40,26 +41,26 @@ async function getOrder(req, res, next) {
         price: pedido.price
       })
     })
-      
-    console.log(newBill);
+
+
     const newTable = await table.create({
       idCustomers: user.dataValues.idCUSTOMERS,
-      idEmployees: Math.floor(Math.random() * 3 + 1),
+      idEmployees: randomEmployeer,
       idOrders: id,
     })
-    console.log(newTable);
+
 
     const userTable = await table.findOne({
       where: {
         idOrders: id,
       }
     });
-    console.log("hasta aqui 2");
+
     const idTable = (userTable.dataValues.idTables)
     res.setHeader('Location', `${httpServerDomain}/order/${id}`);
     return res.status(201).send({ id, idTable });
   } catch (e) {
-    console.log(e);
+
     return res.status(500).send(e.message)
   }
 }

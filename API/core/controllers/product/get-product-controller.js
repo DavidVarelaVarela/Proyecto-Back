@@ -13,10 +13,9 @@ async function getProduct(req, res, next) {
         });
         return res.status(200).send(product);
     } catch (e) {
-        console.error(e);
-        return res.status(500).send({
-            message: e.message,
-        });
+        return res.status(500).send(
+            e.message,
+        );
     }
 }
 
