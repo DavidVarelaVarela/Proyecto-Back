@@ -5,7 +5,7 @@ const bill = require("../../database/models/bill")
 const orders = require("../../database/models/orders");
 
 async function putOrder(req, res, next) {
-    const { totalPrice, starsSelected } = { ...req.body }
+    const { totalPrice, starsSelected, status, time } = { ...req.body }
     const { id } = req.params;
 
 
@@ -16,9 +16,9 @@ async function putOrder(req, res, next) {
 
         const orderToPay = await orders.update({
             idOrders: id,
-            status: 'Pagado',
+            status: status,
             deliveryTime: new Date(),
-            durationTime: null,
+            durationTime: time,
             rating: starsSelected,
             totalPrice: totalPrice,
         }, { where: { idOrders: id } })

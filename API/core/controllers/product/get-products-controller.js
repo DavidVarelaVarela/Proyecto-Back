@@ -15,7 +15,7 @@ async function getProducts(req, res, next) {
             Object.values(product),
         );
     } catch (e) {
-        console.error(e);
+
         return res.status(500).send({
             message: e.message,
         });
