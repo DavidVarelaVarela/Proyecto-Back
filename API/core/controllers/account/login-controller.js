@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const joi = require('joi');
 const customer = require('../../database/models/customers');
+const employees = require('../../database/models/employees');
+
 
 async function validateData(payload) {
 
@@ -33,36 +35,62 @@ async function loginController(req, res, next) {
     /**
      * Two - Send query to database for search user
      */
-    const result = await customer.findOne({
-      where: {
-        mail: accountData.email,
+
+    if (accountData.email) {
+      const result = await customer.findOne({
+        where: {
+          mail: accountData.email,
+        }
+      });
+
+      /**
+       * Three - Check that password send for the user is OK
+       */
+      const thePasswordIsValid = await bcrypt.compare(accountData.password, result.password);
+      if (thePasswordIsValid === false) {
+        return res.status(401).send();
       }
-    });
 
-    /**
-     * Three - Check that password send for the user is OK
-     */
-    const thePasswordIsValid = await bcrypt.compare(accountData.password, result.password);
-    if (thePasswordIsValid === false) {
-      return res.status(401).send();
+      /**
+       * Four - Create token with JWT the payload use role attribute but it is not yet implemented
+       */
+      const role = "user"
+      const payloadJwt = {
+        email: result.dataValues.mail,
+        role: role
+      };
+
+
+      const jwtTokenExpiration = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL, 10);
+      const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, { expiresIn: jwtTokenExpiration });
+      const response = {
+        accessToken: token,
+        expiresIn: jwtTokenExpiration
+      };
+
+      return res.status(200).json(response);
     }
+    if (!accountData.email) {
 
-    /**
-     * Four - Create token with JWT the payload use role attribute but it is not yet implemented
-     */
-    const payloadJwt = {
-      email: result.dataValues.mail,
-    };
-
-
-    const jwtTokenExpiration = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL, 10);
-    const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, { expiresIn: jwtTokenExpiration });
-    const response = {
-      accessToken: token,
-      expiresIn: jwtTokenExpiration
-    };
-
-    return res.status(200).json(response);
+      const employer = await employees.findOne({
+        where: {
+          password: accountData.password,
+        }
+      });
+      /**
+       * Four - Create token with JWT the payload use role attribute but it is not yet implemented
+       */
+      const payloadJwtEmployer = {
+        id: employer.dataValues.idEMPLOYEES,
+      };
+      const jwtTokenExpiration = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL, 10);
+      const token = jwt.sign(payloadJwtEmployer, process.env.AUTH_JWT_SECRET, { expiresIn: jwtTokenExpiration });
+      const response = {
+        accessToken: token,
+        expiresIn: jwtTokenExpiration
+      };
+      return res.status(200).json(response);
+    }
   } catch (e) {
     return res.status(500).send(e.message);
   }

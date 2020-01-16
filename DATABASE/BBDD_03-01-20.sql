@@ -165,6 +165,7 @@ CREATE TABLE `TABLES` (
   `idCustomers` int(11) DEFAULT NULL,
   `idEmployees` int(11) DEFAULT NULL,
   `idOrders` varchar(255) DEFAULT NULL,
+  `help` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`idTables`),
   KEY `fk_Customers_idx` (`idCustomers`),
   KEY `fk_EMPLOYEES_idx` (`idEmployees`),

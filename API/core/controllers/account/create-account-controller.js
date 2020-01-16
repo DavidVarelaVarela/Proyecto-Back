@@ -14,7 +14,7 @@ const jwt = require('jsonwebtoken')
 async function createAccountController(req, res, next) {
   // Y si el cliente es repetido.
   const accountData = { ...req.body };
-  const condition = ((accountData != null) && (accountData.name != null)) // Y demas condiciones
+  const condition = ((accountData !== null) && (accountData.name != null)) // Y demas condiciones
 
   if (condition) {
     //Obtener usuario segun el EMAIL accountData.email

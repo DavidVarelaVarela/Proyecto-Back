@@ -16,7 +16,7 @@ async function getTableStatus(req, res, next) {
             where: {
                 idEmployees: id,
             },
-            attributes: ['idTables', 'idOrders'],
+            attributes: ['idTables', 'idOrders', 'help'],
             include: [{
                 model: orders,
                 where: {
@@ -25,19 +25,6 @@ async function getTableStatus(req, res, next) {
             },
             ]
         });
-
-        const statusTables = await order.map((produts) => {
-            bill.findAll({
-                where: {
-                    idOrder: produts.dataValues.idOrders,
-                },
-            });
-            return { idOrder: produts.dataValues.idOrders, idTables: produts.dataValues.idTables }
-
-        })
-
-
-
         return res.status(200).send(order)
     } catch (e) {
         return res.status(500).send(e.message)
