@@ -18,6 +18,9 @@ const tables = mysqlPool.define(
 
     idOrders: {
       type: Sequelize.INTEGER
+    },
+    help: {
+      type: Sequelize.INTEGER
     }
   },
   {

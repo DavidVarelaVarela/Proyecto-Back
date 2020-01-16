@@ -12,7 +12,7 @@ const getFeedback = require('../controllers/order/get-feedback-controller');
  * Rutas
  */
 
-router.get('/order/feedback', getFeedback)
+router.get('/order/feedback/:id', getFeedback)
 router.post('/order', checkJwtToken, getOrder)
 router.put('/order/:id', checkJwtToken, putOrder)
 
